@@ -14,26 +14,26 @@ public class InteractibleObject : MonoBehaviour
     public bool CanOverdo;
     public float OverdoTime;
 
-    private bool IsInRange;
+    protected bool IsInRange;
     public bool IsBeingManned;
 
-    private float CurrentProgress;
-    private bool IsInitiated;
-    private bool IsFinished;
-    private bool IsOperating;
+    protected float CurrentProgress;
+    protected bool IsInitiated;
+    protected bool IsFinished;
+    protected bool IsOperating;
 
     public GameObject ObjectToTake;
     public GameObject ObjectToGive;
 
-    private static float intervalAmount = 0.1f;
+    protected static float intervalAmount = 0.1f;
 
-    private void Start()
+    protected void Start()
     {
         IsInitiated = false;
         IsFinished= false;
     }
 
-    private void Update()
+    protected void Update()
     {
         if(CurrentProgress >= 100)
         {
@@ -76,7 +76,7 @@ public class InteractibleObject : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider collision)
+    protected void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.layer == 7)
         {
@@ -85,7 +85,7 @@ public class InteractibleObject : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider collision)
+    protected void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.layer == 7)
         {
@@ -103,7 +103,7 @@ public class InteractibleObject : MonoBehaviour
         }
     }
 
-    private void InitiateUse()
+    protected void InitiateUse()
     {
         Debug.Log("InitiatingUse");
 
@@ -125,7 +125,7 @@ public class InteractibleObject : MonoBehaviour
         
     }
 
-    IEnumerator Operating(float duration)
+    protected IEnumerator Operating(float duration)
     {
         if (IsOperating)
         {
@@ -136,7 +136,7 @@ public class InteractibleObject : MonoBehaviour
         StartCoroutine(Operating(duration));
     }
 
-    private void FinishUse()
+    protected void FinishUse()
     {
         StopCoroutine(Operating(intervalAmount));
         Debug.Log("finished, giving item");

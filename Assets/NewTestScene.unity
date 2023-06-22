@@ -282,10 +282,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ApplianceName: 
-  OperatingTime: 0
+  OperatingTime: 2
   ProgressBar: {fileID: 0}
   ProgressBarFill: {fileID: 0}
-  NeedsToBeManned: 0
+  NeedsToBeManned: 1
   CanOverdo: 0
   OverdoTime: 0
   IsBeingManned: 0
