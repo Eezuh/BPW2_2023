@@ -15,7 +15,6 @@ public class InteractibleObject : MonoBehaviour
     public float OverdoTime;
 
     protected bool IsInRange;
-    public bool IsBeingManned;
 
     protected float CurrentProgress;
     protected bool IsInitiated;
@@ -31,6 +30,7 @@ public class InteractibleObject : MonoBehaviour
     {
         IsInitiated = false;
         IsFinished= false;
+        CurrentProgress = 0;
     }
 
     protected void Update()
@@ -69,12 +69,11 @@ public class InteractibleObject : MonoBehaviour
                     IsOperating = false;
                 }
             }
-            
-
 
         }
 
     }
+
 
     protected void OnTriggerEnter(Collider collision)
     {
@@ -94,13 +93,20 @@ public class InteractibleObject : MonoBehaviour
 
             if (IsFinished)
             {
-                //reset
+                ResetObject();
             }
             if (NeedsToBeManned)
             {
                 IsOperating= false;
             }
         }
+    }
+
+    protected void ResetObject()
+    {
+        IsInitiated = false;
+        IsFinished = false;
+        CurrentProgress = 0;
     }
 
     protected void InitiateUse()
@@ -116,7 +122,7 @@ public class InteractibleObject : MonoBehaviour
         {
             ProgressBar.SetActive(true);
             IsInitiated = true;
-            StartCoroutine(Operating(intervalAmount));
+            StartCoroutine(Operating(OperatingTime));
         }
         else
         {
@@ -140,7 +146,7 @@ public class InteractibleObject : MonoBehaviour
     {
         StopCoroutine(Operating(intervalAmount));
         Debug.Log("finished, giving item");
-        //reset stuff, but is also done when leaving
+        ProgressBar.SetActive(false);
     }
 
    
